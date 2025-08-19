@@ -30,6 +30,7 @@ const hootSchema = new mongoose.Schema(
       enum: ['News', 'Sports', 'Games', 'Movies', 'Music', 'Television'],
     },
     author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    comments: [commentSchema],
   },
   { timestamps: true }
 );
