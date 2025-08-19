@@ -11,6 +11,7 @@ const logger = require('morgan');
 const authRouter = require('./controllers/auth');
 const testJwtRouter = require('./controllers/test-jwt');
 const usersRouter = require('./controllers/users');
+const hootsRouter = require('./controllers/hoots');
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI);
@@ -18,6 +19,8 @@ mongoose.connect(process.env.MONGODB_URI);
 mongoose.connection.on('connected', () => {
   console.log(`Connected to MongoDB ${mongoose.connection.name}.`);
 });
+
+const PORT = process.env.PORT ? process.env.PORT : '3000';
 
 // Middleware
 app.use(cors());
@@ -28,8 +31,9 @@ app.use(logger('dev'));
 app.use('/auth', authRouter);
 app.use('/test-jwt', testJwtRouter);
 app.use('/users', usersRouter);
+app.use('/hoots', hootsRouter);
 
 // Start the server and listen on port 3000
-app.listen(3000, () => {
+app.listen(PORT, () => {
   console.log('The express app is ready!');
 });
